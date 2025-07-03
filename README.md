@@ -84,10 +84,12 @@ ROOT_DIR/Instagram/用户名/
 
 ## 示例
 
-![ep1](https://github.com/user-attachments/assets/f0d642f4-7281-43bf-a110-40ea55db0add)
 原帖文
-![ep2](https://github.com/user-attachments/assets/96a70711-9140-4e89-892e-4fc925abc6de)
+<img src="https://github.com/user-attachments/assets/f0d642f4-7281-43bf-a110-40ea55db0add" alt="ep1" width="400"/>
+
 下载后的md格式贴文
+<img src="https://github.com/user-attachments/assets/96a70711-9140-4e89-892e-4fc925abc6de" alt="ep1" width="400"/>
+
 ---
 
 ## License
