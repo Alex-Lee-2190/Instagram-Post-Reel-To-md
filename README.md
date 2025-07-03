@@ -1,8 +1,8 @@
 # Instagram-Post-Reel-To-md
 
-一个用于下载 Instagram 用户帖子和 Reels 的 Python 脚本，支持批量下载、文件整理和元数据处理，并将贴文的内容整理为md文件。使用 `instaloader` 和 `gallery-dl` 库，提供去重下载和失败重试功能，适用于自动化抓取 Instagram 内容。
+[English](README-EN.md)
 
-[English Version](README-EN.md)
+一个用于下载 Instagram 用户帖子和 Reels 的 Python 脚本，支持批量下载、文件整理和元数据处理，并将贴文的内容整理为md文件。使用 `instaloader` 和 `gallery-dl` 库，提供去重下载和失败重试功能，适用于自动化抓取 Instagram 内容。
 
 ---
 
