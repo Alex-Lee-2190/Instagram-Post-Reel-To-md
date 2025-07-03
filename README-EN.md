@@ -1,6 +1,6 @@
 # Instagram-Post-Reel-To-md
 
-A Python script for downloading Instagram user posts and Reels, organizing files, processing metadata, and exporting post content into Markdown format. It supports batch downloads, deduplication, and retry mechanisms using the `instaloader` and `gallery-dl` libraries. Suitable for automating the archiving of Instagram content.
+A Python script for downloading Instagram user posts and Reels and exporting post content into Markdown format. Using the `instaloader` and `gallery-dl` libraries, suitable for automating the archiving of Instagram content.
 
 ---
 
