@@ -1,6 +1,6 @@
 # Instagram-Post-Reel-To-md
 
-一个用于下载 Instagram 用户帖子和 Reels 的 Python 脚本，支持批量下载、文件整理和元数据处理。使用 `instaloader` 和 `gallery-dl` 工具，提供增量下载和失败重试功能，适用于自动化抓取 Instagram 内容。
+一个用于下载 Instagram 用户帖子和 Reels 的 Python 脚本，支持批量下载、文件整理和元数据处理，并将贴文的内容整理为md文件。使用 `instaloader` 和 `gallery-dl` 库，提供去重下载和失败重试功能，适用于自动化抓取 Instagram 内容。
 
 ---
 
@@ -11,15 +11,13 @@
   - `zmarkdown/`：描述文件（Markdown）
   - `media/`：图片 / 视频
   - `metadata/`：元数据（JSON）
-- **增量下载**：检测已下载内容，避免重复下载。
-- **失败重试**：记录下载失败的帖子并支持重新下载。
+- **去重下载**：记录每个帖子和 Reels 的 URL，避免重复下载。
+- **失败重试**：记录下载失败的帖子和 Reels 并支持重新下载。
 - **Markdown 生成**：每个帖子生成 `.md` 文件，包含上传时间、标题、URL、点赞数等。
 - **多模式支持**：
   - 模式 1：下载用户的全部帖子和 Reels。
   - 模式 2：重新下载失败的帖子。
   - 模式 3：检查并下载最新内容。
-  - 模式 4：保存 Instagram 文件夹的子文件夹名称。
-  - 模式 5：从指定文件加载 URL 下载 Reels。
 
 ---
 
@@ -55,23 +53,11 @@ user2
 在脚本顶部设置以下路径：
 
 ```python
-COOKIE_FILE_PATH = 'C:/Users/YourUser/Downloads/www.instagram.com_cookies.txt'
-ROOT_DIR = 'D:/0FILE/Library'
+COOKIE_FILE_PATH = '...'
+ROOT_DIR = '...'
 ```
 
 ### 3. 运行脚本并选择模式
-
-```bash
-python instagram_downloader.py
-```
-
-选择运行模式（输入对应数字）：
-
-- `1`：下载全部帖子和 Reels
-- `2`：重新下载失败的帖子
-- `3`：检查并下载最新内容
-- `4`：保存 Instagram 文件夹的子文件夹名称到 `file_list.txt`
-- `5`：从 `url.txt` 加载帖子 URL 并下载 Reels
 
 ---
 
@@ -96,26 +82,16 @@ ROOT_DIR/Instagram/用户名/
 
 ---
 
-## 📄 License
+## 示例
+
+![ep1](https://github.com/user-attachments/assets/f0d642f4-7281-43bf-a110-40ea55db0add)
+原帖文
+![ep2](https://github.com/user-attachments/assets/96a70711-9140-4e89-892e-4fc925abc6de)
+下载后的md格式贴文
+---
+
+## License
 
 本项目采用 [MIT License](LICENSE)。
 
 ---
-
-## 💬 示例
-
-假设 `following.txt` 内容为：
-
-```
-user1
-user2
-```
-
-运行：
-
-```bash
-python instagram_downloader.py
-# 输入: 1
-```
-
-程序将批量下载 user1 和 user2 的帖子与 Reels，并自动分类存储。
