@@ -104,10 +104,10 @@ def download_reels(username_to_download, base_dir, post_urls, base_dir1, idx_mai
             command.append(f"{start}-{end}")
         # 执行命令
         subprocess.run(command, check=True)
-        print(f"✅ 成功下载 Reels 元数据：{username_to_download}")
+        print(f"成功下载 Reels 元数据：{username_to_download}")
 
     except subprocess.CalledProcessError as e:
-        print(f"❌ 下载失败：{e}")
+        print(f"下载失败：{e}")
         return [], False
 
     if mode == 2:
@@ -130,7 +130,7 @@ def download_reels(username_to_download, base_dir, post_urls, base_dir1, idx_mai
                         continue
                     # 再判断是否在已有 post_urls 中
                     if any(post_url == url for _, url in post_urls):
-                        print(f"⚠️ 重复的 URL：{post_url}")
+                        print(f"重复的 URL：{post_url}")
                         if times != 1:
                             if found_duplicate_once:
                                 found_duplicate_twice = True
@@ -138,7 +138,7 @@ def download_reels(username_to_download, base_dir, post_urls, base_dir1, idx_mai
                                 found_duplicate_once = True
                     else:
                         reel_urls.append((shortcode, post_url))
-                        print(f"✅ 新的 Reels URL：{post_url}")
+                        print(f"新的 Reels URL：{post_url}")
     print("times", times)
     print("found_duplicate_once:", found_duplicate_once)
     print("found_duplicate_twice:", found_duplicate_twice)
@@ -146,7 +146,7 @@ def download_reels(username_to_download, base_dir, post_urls, base_dir1, idx_mai
 
     if mode == 1:
         if not reel_urls:
-            print(f"⚠️ 没有新 Reels URL，跳过下载和处理：{username_to_download}")
+            print(f"没有新 Reels URL，跳过下载和处理：{username_to_download}")
             return []
 
     download_user(choose, username_to_download, reel_urls, idx_main, total_users_main)
@@ -164,14 +164,14 @@ def rename_reels_files(folder_path, username_to_download):
 
             date_str = data.get("date")
             if not date_str:
-                print(f"❌ 缺少 date 字段：{file}")
+                print(f"缺少 date 字段：{file}")
                 continue
 
             try:
                 dt = datetime.strptime(date_str, "%Y-%m-%d %H:%M:%S")
                 new_base = dt.strftime("%Y-%m-%d_%H-%M-%S_UTC")
             except ValueError:
-                print(f"⚠️ 时间格式错误：{date_str} in {file}")
+                print(f"时间格式错误：{date_str} in {file}")
                 continue
 
             old_base = file.replace(".json", "")
@@ -188,22 +188,22 @@ def rename_reels_files(folder_path, username_to_download):
                 os.rename(mp4_old, mp4_new)
                 print(f"mp4  重命名：{mp4_old} → {mp4_new}")
             else:
-                print(f"⚠️ 未找到视频文件：{mp4_old}")
+                print(f"未找到视频文件：{mp4_old}")
 
             os.rename(json_old, json_new)
             print(f"json 重命名：{json_old} → {json_new}")
 
-            # ✅ 转移文件
+            # 转移文件
             metadata_gallery_dl_dir = os.path.join(folder_path, "metadata_gallery-dl")
             os.makedirs(media_dir, exist_ok=True)
             os.makedirs(metadata_gallery_dl_dir, exist_ok=True)
 
             if os.path.exists(mp4_new):
                 shutil.move(mp4_new, os.path.join(media_dir, os.path.basename(mp4_new)))
-                print(f"📁 移动视频到 {media_dir}")
+                print(f"移动视频到 {media_dir}")
             if os.path.exists(json_new):
                 shutil.move(json_new, os.path.join(metadata_gallery_dl_dir, os.path.basename(json_new)))
-                print(f"📁 移动元数据到 {metadata_gallery_dl_dir}")
+                print(f"移动元数据到 {metadata_gallery_dl_dir}")
 
 
 def process_user_reels(username_to_download, idx_main, total_users_main, post_urls, times, mode):
@@ -310,11 +310,11 @@ def download_posts_by_url(choose, username_to_download, post_urls, base_dir, idx
         try:
             post = Post.from_shortcode(L.context, shortcode)
             L.download_post(post, target=f"{shortcode}")
-            print(f"✅ 下载成功：{shortcode}: [{total_users_main}/{idx_main}]: [{total_url}/{idx}]")
+            print(f"下载成功：{shortcode}: [{total_users_main}/{idx_main}]: [{total_url}/{idx}]")
             if choose == "2":
                 remove_failed_log_entry(shortcode)
         except Exception as e:
-            print(f"[{total_url}/{idx}]: ❌ 下载失败 {shortcode}: {e}")
+            print(f"[{total_url}/{idx}]: 下载失败 {shortcode}: {e}")
             if not choose == "2":
                 log_failed_download(username_to_download, shortcode, url)
 
@@ -490,7 +490,7 @@ def get_latest_downloaded_filename(username_to_download, idx_main, total_users_m
             file_name = f"{formatted_time}.json"
 
             if file_name in existing_files:
-                print(f"❌ 文件重复：{file_name} ")
+                print(f"文件重复：{file_name} ")
 
                 if p_found_duplicate_once:
                     p_found_duplicate_twice = True
@@ -498,13 +498,13 @@ def get_latest_downloaded_filename(username_to_download, idx_main, total_users_m
                     p_found_duplicate_once = True
 
                 if times >= 2 and p_found_duplicate_twice:
-                    print(f"❌ 连续两次检测到重复，停止下载！times={times}")
+                    print(f"连续两次检测到重复，停止下载！times={times}")
                     stop_download = True
                     break  # 跳出内层 for
                 else:
                     break  # 只跳出当前 post_urls 循环，继续下一次 times
             else:
-                print(f"✅ 添加文件：{file_name}")
+                print(f"添加文件：{file_name}")
                 post_updates.append((shortcode, url))
                 p_found_duplicate_once = False  # 成功添加则清空第一次重复标志
         download_user("1", username_to_download, post_updates, idx_main, total_users_main)
